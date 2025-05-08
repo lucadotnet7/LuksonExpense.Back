@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{994EF546-E114-4A9F-A25D-D1FBE35FFD17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1E4D90DE-60C0-4AE1-9A83-3A596088AE4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuksonExpenseAPI", "LuksonExpenseAPI\LuksonExpenseAPI.csproj", "{33C284A0-B443-428D-9F3E-71585BDE4915}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuksonExpense.Domain", "LuksonExpense.Domain\LuksonExpense.Domain.csproj", "{B5DCA611-38A5-4086-B579-D32C607CC6C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuksonExpense.Application", "LuksonExpense.Application\LuksonExpense.Application.csproj", "{49BE5E65-3C35-4EA0-B031-EC2772D9E7E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuksonExpense.Infrastructure", "LuksonExpense.Infrastructure\LuksonExpense.Infrastructure.csproj", "{2CE95204-270D-41E3-BB69-9DCC334AEFEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33C284A0-B443-428D-9F3E-71585BDE4915}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33C284A0-B443-428D-9F3E-71585BDE4915}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33C284A0-B443-428D-9F3E-71585BDE4915}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33C284A0-B443-428D-9F3E-71585BDE4915}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5DCA611-38A5-4086-B579-D32C607CC6C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5DCA611-38A5-4086-B579-D32C607CC6C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5DCA611-38A5-4086-B579-D32C607CC6C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5DCA611-38A5-4086-B579-D32C607CC6C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49BE5E65-3C35-4EA0-B031-EC2772D9E7E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49BE5E65-3C35-4EA0-B031-EC2772D9E7E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49BE5E65-3C35-4EA0-B031-EC2772D9E7E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49BE5E65-3C35-4EA0-B031-EC2772D9E7E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CE95204-270D-41E3-BB69-9DCC334AEFEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CE95204-270D-41E3-BB69-9DCC334AEFEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CE95204-270D-41E3-BB69-9DCC334AEFEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CE95204-270D-41E3-BB69-9DCC334AEFEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{33C284A0-B443-428D-9F3E-71585BDE4915} = {994EF546-E114-4A9F-A25D-D1FBE35FFD17}
+		{B5DCA611-38A5-4086-B579-D32C607CC6C3} = {994EF546-E114-4A9F-A25D-D1FBE35FFD17}
+		{49BE5E65-3C35-4EA0-B031-EC2772D9E7E9} = {994EF546-E114-4A9F-A25D-D1FBE35FFD17}
+		{2CE95204-270D-41E3-BB69-9DCC334AEFEE} = {994EF546-E114-4A9F-A25D-D1FBE35FFD17}
+	EndGlobalSection
+EndGlobal
