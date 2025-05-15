@@ -6,6 +6,9 @@ namespace LuksonExpense.Infrastructure.Database
     public sealed class ApplicationDbContext : DbContext
     {
         public DbSet<Module> Modules { get; set; }
+        public DbSet<Budget> Budgets { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

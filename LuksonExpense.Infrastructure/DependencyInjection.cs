@@ -10,6 +10,7 @@ namespace LuksonExpense.Infrastructure
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IModuleRepository, ModuleRepository>();
+            services.AddScoped<IBudgetRepository, BudgetRepository>();
         }
 
         

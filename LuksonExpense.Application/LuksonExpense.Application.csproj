@@ -21,4 +21,9 @@
     <PackageReference Include="Serilog" Version="4.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\V1\Budgets\Queries\" />
+    <Folder Include="UseCases\V1\Categories\" />
+  </ItemGroup>
+
 </Project>

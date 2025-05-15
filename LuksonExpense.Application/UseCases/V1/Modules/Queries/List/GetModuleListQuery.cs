@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using AutoMapper;
-using LuksonExpense.Application.DTOs.Modules;
+using LuksonExpense.Application.DTOs.MappingDtos.Modules;
 using LuksonExpense.Application.DTOs.Responses.Modules;
 using LuksonExpense.Domain.Models;
 using LuksonExpense.Domain.Shared;

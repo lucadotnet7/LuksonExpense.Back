@@ -3,6 +3,7 @@ using System;
 using LuksonExpense.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LuksonExpense.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250514225658_create_new_tables")]
+    partial class create_new_tables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,13 +44,13 @@ namespace LuksonExpense.Infrastructure.Database.Migrations
                     b.Property<DateOnly>("FromDate")
                         .HasColumnType("date");
 
+                    b.Property<DateOnly>("FromTo")
+                        .HasColumnType("date");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(80)
                         .HasColumnType("character varying(80)");
-
-                    b.Property<DateOnly>("ToDate")
-                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
@@ -147,30 +150,6 @@ namespace LuksonExpense.Infrastructure.Database.Migrations
                             IconName = "HomeIcon",
                             Name = "Inicio",
                             Route = ""
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Sección donde se administran los presupuestos.",
-                            IconName = "AccountBalanceWalletIcon",
-                            Name = "Presupuestos",
-                            Route = "/budgets"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Sección donde se administran los gastos",
-                            IconName = "CompareArrowsIcon",
-                            Name = "Gastos",
-                            Route = "/expenses"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Sección donde se administran las categorías",
-                            IconName = "AutoAwesomeMosaicIcon",
-                            Name = "Categorías",
-                            Route = "/categories"
                         });
                 });
 

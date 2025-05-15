@@ -3,6 +3,7 @@ using System;
 using LuksonExpense.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LuksonExpense.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250514232620_change_column_name_for_budgets")]
+    partial class change_column_name_for_budgets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,30 +150,6 @@ namespace LuksonExpense.Infrastructure.Database.Migrations
                             IconName = "HomeIcon",
                             Name = "Inicio",
                             Route = ""
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Sección donde se administran los presupuestos.",
-                            IconName = "AccountBalanceWalletIcon",
-                            Name = "Presupuestos",
-                            Route = "/budgets"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Sección donde se administran los gastos",
-                            IconName = "CompareArrowsIcon",
-                            Name = "Gastos",
-                            Route = "/expenses"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Sección donde se administran las categorías",
-                            IconName = "AutoAwesomeMosaicIcon",
-                            Name = "Categorías",
-                            Route = "/categories"
                         });
                 });
 

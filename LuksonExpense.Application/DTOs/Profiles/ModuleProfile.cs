@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using LuksonExpense.Application.DTOs.Modules;
-using LuksonExpense.Application.DTOs.Requests;
+using LuksonExpense.Application.DTOs.MappingDtos.Modules;
+using LuksonExpense.Application.DTOs.Requests.Modules;
 using LuksonExpense.Domain.Models;
 
 namespace LuksonExpense.Application.DTOs.Profiles

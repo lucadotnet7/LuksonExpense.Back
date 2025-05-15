@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
+using MediatR;
+using LuksonExpense.Application.Abstractions.Behaviors;
 
 namespace LuksonExpense.Application
 {
@@ -17,6 +19,7 @@ namespace LuksonExpense.Application
              });
 
             services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
 
             return services;
         }

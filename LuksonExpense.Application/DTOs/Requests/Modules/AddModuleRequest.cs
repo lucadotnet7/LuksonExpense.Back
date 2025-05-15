@@ -1,4 +1,4 @@
-﻿namespace LuksonExpense.Application.DTOs.Requests
+﻿namespace LuksonExpense.Application.DTOs.Requests.Modules
 {
     public sealed class AddModuleRequest
     {

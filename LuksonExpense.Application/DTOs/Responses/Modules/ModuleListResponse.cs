@@ -1,4 +1,4 @@
-﻿using LuksonExpense.Application.DTOs.Modules;
+﻿using LuksonExpense.Application.DTOs.MappingDtos.Modules;
 
 namespace LuksonExpense.Application.DTOs.Responses.Modules
 {

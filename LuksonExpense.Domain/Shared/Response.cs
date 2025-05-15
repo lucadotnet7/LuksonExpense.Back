@@ -24,6 +24,6 @@ namespace LuksonExpense.Domain.Shared
 
     public class ErrorResponse
     {
-        public string ErrorMessage { get; set; } = string.Empty;
+        public ICollection<string> ErrorMessages { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using AutoMapper;
-using LuksonExpense.Application.DTOs.Modules;
-using LuksonExpense.Application.DTOs.Requests;
+using LuksonExpense.Application.DTOs.MappingDtos.Modules;
+using LuksonExpense.Application.DTOs.Requests.Modules;
 using LuksonExpense.Domain.Models;
 using LuksonExpense.Domain.Shared;
 using LuksonExpense.Infrastructure.Interfaces;
@@ -30,7 +30,7 @@ namespace LuksonExpense.Application.UseCases.V1.Modules.Commands.Add
                     response.StatusCode = HttpStatusCode.BadRequest;
                     response.Error = new ErrorResponse
                     {
-                        ErrorMessage = "Ya existe un módulo con el mismo nombre."
+                        ErrorMessages = new List<string> { "Ya existe un módulo con el mismo nombre." }
                     };
 
                     return response;
