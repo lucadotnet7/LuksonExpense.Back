@@ -14,7 +14,9 @@ namespace LuksonExpense.Application.UseCases.V1.Budgets.Commands.Add
         public AddBudgetRequest Request { get; set; }
     }
 
-    public sealed class AddBudgetCommandHandler(IMapper mapper, IBudgetRepository repository) : IRequestHandler<AddBudgetCommand, Response<BudgetDTO>>
+    public sealed class AddBudgetCommandHandler(
+        IMapper mapper, IBudgetRepository repository) 
+        : IRequestHandler<AddBudgetCommand, Response<BudgetDTO>>
     {
         public async Task<Response<BudgetDTO>> Handle(AddBudgetCommand request, CancellationToken cancellationToken)
         {
