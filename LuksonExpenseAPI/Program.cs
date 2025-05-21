@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || true) //Deshabilitar, solo para testing...
 {
     app.UseSwagger();
     app.UseSwaggerUI();
