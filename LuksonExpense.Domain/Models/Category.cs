@@ -18,6 +18,6 @@ namespace LuksonExpense.Domain.Models
         [Required]
         [ForeignKey("ExpenseId")]
         public Guid ExpenseId { get; set; }
-        public Expense Expense { get; set; }
+        public Expense? Expense { get; set; }
     }
 }

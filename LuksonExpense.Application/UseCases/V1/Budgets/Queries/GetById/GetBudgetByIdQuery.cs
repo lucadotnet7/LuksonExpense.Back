@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using AutoMapper;
+using LuksonExpense.Application.Abstractions.Authentication;
 using LuksonExpense.Application.DTOs.MappingDtos.Budgets;
 using LuksonExpense.Domain.Models;
 using LuksonExpense.Domain.Shared;
@@ -13,8 +14,9 @@ namespace LuksonExpense.Application.UseCases.V1.Budgets.Queries.GetById
         public Guid BudgetId { get; set; }
     }
 
-    public sealed class GetBudgetByIdQueryHandler
-        (IMapper mapper, IBudgetRepository repository)
+    public sealed class GetBudgetByIdQueryHandler(
+        IMapper mapper, IBudgetRepository repository,
+        AuthProvider authProvider)
         : IRequestHandler<GetBudgetByIdQuery, Response<BudgetDTO>>
     {
         public async Task<Response<BudgetDTO>> Handle(GetBudgetByIdQuery request, CancellationToken cancellationToken)
@@ -22,7 +24,9 @@ namespace LuksonExpense.Application.UseCases.V1.Budgets.Queries.GetById
             var response = new Response<BudgetDTO>();
             try
             {
-                Budget? budget = await repository.GetById(request.BudgetId);
+                User loggedUser = await authProvider.GetCurrentUser();
+
+                Budget? budget = await repository.GetById(request.BudgetId, loggedUser.Id);
 
                 if (budget is null)
                 {

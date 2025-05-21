@@ -11,8 +11,7 @@ namespace LuksonExpense.Infrastructure
         {
             services.AddScoped<IModuleRepository, ModuleRepository>();
             services.AddScoped<IBudgetRepository, BudgetRepository>();
-        }
-
-        
+            services.AddScoped<IUserRepository, UserRepository>();
+        }   
     }
 }

@@ -20,8 +20,8 @@ namespace LuksonExpense.Domain.Models
         [Required]
         [ForeignKey("BudgetId")]
         public Guid BudgetId { get; set; }
-        public Budget Budget { get; set; }
+        public Budget? Budget { get; set; }
 
-        public ICollection<Category> Categories { get; set; }
+        public ICollection<Category> Categories { get; set; } = new List<Category>();
     }
 }

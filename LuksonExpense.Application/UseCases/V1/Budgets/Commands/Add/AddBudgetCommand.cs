@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LuksonExpense.Application.Abstractions.Authentication;
 using LuksonExpense.Application.DTOs.MappingDtos.Budgets;
 using LuksonExpense.Application.DTOs.Requests.Budgets;
 using LuksonExpense.Domain.Models;
@@ -15,7 +16,8 @@ namespace LuksonExpense.Application.UseCases.V1.Budgets.Commands.Add
     }
 
     public sealed class AddBudgetCommandHandler(
-        IMapper mapper, IBudgetRepository repository) 
+        IMapper mapper, IBudgetRepository repository,
+        AuthProvider authProvider) 
         : IRequestHandler<AddBudgetCommand, Response<BudgetDTO>>
     {
         public async Task<Response<BudgetDTO>> Handle(AddBudgetCommand request, CancellationToken cancellationToken)
@@ -24,10 +26,15 @@ namespace LuksonExpense.Application.UseCases.V1.Budgets.Commands.Add
 
             try
             {
-                Budget createdBudget = await repository.Add(mapper.Map<Budget>(request.Request));
+                User loggedUser = await authProvider.GetCurrentUser();
+                Budget newBudget = mapper.Map<Budget>(request.Request);
+                newBudget.UserId = loggedUser.Id;
+                newBudget.User = loggedUser;
+
+                newBudget = await repository.Add(newBudget);
 
                 response.StatusCode = HttpStatusCode.Created;
-                response.Content = mapper.Map<BudgetDTO>(createdBudget);
+                response.Content = mapper.Map<BudgetDTO>(newBudget);
 
                 return response;
             }

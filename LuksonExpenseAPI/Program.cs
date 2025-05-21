@@ -24,6 +24,7 @@ if (app.Environment.IsDevelopment() || true) //Deshabilitar, solo para testing..
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCors();

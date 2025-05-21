@@ -8,11 +8,12 @@ namespace LuksonExpense.Infrastructure.Repositories
 {
     public sealed class BudgetRepository(ApplicationDbContext context) : IBudgetRepository
     {
-        public async Task<Budget?> GetById(Guid budgetId)
+        public async Task<Budget?> GetById(Guid budgetId, Guid userId)
         {
             try
             {
-                Budget? budget = await context.Budgets.FirstOrDefaultAsync(x => x.Id == budgetId);
+                Budget? budget = await context.Budgets
+                                    .FirstOrDefaultAsync(x => x.Id == budgetId && x.UserId == userId);
 
                 return budget;
             }
@@ -22,11 +23,11 @@ namespace LuksonExpense.Infrastructure.Repositories
             }
         }
 
-        public async Task<IEnumerable<Budget>> GetList()
+        public async Task<IEnumerable<Budget>> GetList(Guid userId)
         {
             try
             {
-                return await context.Budgets.ToListAsync();
+                return await context.Budgets.Where(x => x.UserId == userId).ToListAsync();
             }
             catch (Exception)
             {

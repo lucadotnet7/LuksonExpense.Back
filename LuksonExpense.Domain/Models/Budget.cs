@@ -28,6 +28,11 @@ namespace LuksonExpense.Domain.Models
         [Required]
         public DateTime CreatedAt { get; set; }
 
-        public ICollection<Expense> Expenses { get; set; }
+        public ICollection<Expense> Expenses { get; set; } = new List<Expense>();
+
+        [Required]
+        [ForeignKey("UserId")]
+        public Guid UserId { get; set; }
+        public User? User { get; set; }
     }
 }

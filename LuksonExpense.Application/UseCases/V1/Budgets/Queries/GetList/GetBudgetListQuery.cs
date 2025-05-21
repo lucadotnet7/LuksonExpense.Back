@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using AutoMapper;
+using LuksonExpense.Application.Abstractions.Authentication;
 using LuksonExpense.Application.DTOs.MappingDtos.Budgets;
 using LuksonExpense.Domain.Models;
 using LuksonExpense.Domain.Shared;
@@ -13,7 +14,8 @@ namespace LuksonExpense.Application.UseCases.V1.Budgets.Queries.GetList
     }
 
     public sealed class GetBudgetListQueryHandler(
-        IMapper mapper, IBudgetRepository repository) 
+        IMapper mapper, IBudgetRepository repository,
+        AuthProvider authProvider) 
         : IRequestHandler<GetBudgetListQuery, Response<IEnumerable<BudgetDTO>>>
     {
         public async Task<Response<IEnumerable<BudgetDTO>>> Handle(GetBudgetListQuery request, CancellationToken cancellationToken)
@@ -21,7 +23,8 @@ namespace LuksonExpense.Application.UseCases.V1.Budgets.Queries.GetList
             var response = new Response<IEnumerable<BudgetDTO>>();
             try
             {
-                IEnumerable<Budget> budgets = await repository.GetList();
+                User loggedUser = await authProvider.GetCurrentUser();
+                IEnumerable<Budget> budgets = await repository.GetList(loggedUser.Id);
 
                 response.StatusCode = HttpStatusCode.OK;
                 response.Content = mapper.Map<IEnumerable<BudgetDTO>>(budgets);

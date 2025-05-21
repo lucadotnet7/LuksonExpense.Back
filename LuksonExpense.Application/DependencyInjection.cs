@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
 using MediatR;
 using LuksonExpense.Application.Abstractions.Behaviors;
+using LuksonExpense.Application.Abstractions.Authentication;
+using Microsoft.AspNetCore.Identity;
 
 namespace LuksonExpense.Application
 {
@@ -20,7 +22,9 @@ namespace LuksonExpense.Application
 
             services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
-
+            services.AddScoped<PasswordHasher<object>>();
+            services.AddScoped<AuthProvider>();
+            services.AddScoped<PwdHasher>();
             return services;
         }
     }

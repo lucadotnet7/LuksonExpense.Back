@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using AutoMapper;
+using LuksonExpense.Application.Abstractions.Authentication;
 using LuksonExpense.Application.DTOs.MappingDtos.Budgets;
 using LuksonExpense.Application.DTOs.Requests.Budgets;
 using LuksonExpense.Domain.Models;
@@ -16,7 +17,8 @@ namespace LuksonExpense.Application.UseCases.V1.Budgets.Commands.Edit
     }
 
     public sealed class EditBudgetCommandHandler(
-        IMapper mapper, IBudgetRepository repository) 
+        IMapper mapper, IBudgetRepository repository,
+        AuthProvider authProvider) 
         : IRequestHandler<EditBudgetCommand, Response<BudgetDTO>>
     {
         public async Task<Response<BudgetDTO>> Handle(EditBudgetCommand request, CancellationToken cancellationToken)
@@ -25,7 +27,9 @@ namespace LuksonExpense.Application.UseCases.V1.Budgets.Commands.Edit
 
             try
             {
-                Budget? existedBudget = await repository.GetById(request.BudgetId);
+                User loggedUser = await authProvider.GetCurrentUser();
+
+                Budget? existedBudget = await repository.GetById(request.BudgetId, loggedUser.Id);
 
                 if (existedBudget is null)
                 {
