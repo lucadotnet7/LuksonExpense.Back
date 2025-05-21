@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\V1\Budgets\Queries\" />
     <Folder Include="UseCases\V1\Categories\" />
   </ItemGroup>
 

@@ -31,9 +31,9 @@ namespace LuksonExpense.Application.UseCases.V1.Budgets.Commands.Add
 
                 return response;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
     }

@@ -8,6 +8,6 @@ namespace LuksonExpense.Infrastructure.Interfaces
         Task<Budget?> GetById(Guid budgetId);
         Task<IEnumerable<Budget>> GetList();
         Task<Budget> Update(Budget budget);
-        Task DeleteById(Budget budget);
+        Task Delete(Budget budget);
     }
 }

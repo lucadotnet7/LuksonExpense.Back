@@ -70,7 +70,7 @@ namespace LuksonExpense.Infrastructure.Repositories
             }
         }
 
-        public async Task DeleteById(Budget budget)
+        public async Task Delete(Budget budget)
         {
             try
             {
