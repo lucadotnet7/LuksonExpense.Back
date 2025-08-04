@@ -15,9 +15,7 @@ namespace LuksonExpense.Domain.Models
         [Column(TypeName = "text")]
         public string Description { get; set; } = string.Empty;
 
-        [Required]
         [ForeignKey("ExpenseId")]
-        public Guid ExpenseId { get; set; }
-        public Expense? Expense { get; set; }
+        public Expense Expense { get; set; } = new();
     }
 }

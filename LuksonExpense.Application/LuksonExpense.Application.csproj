@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="UseCases\V1\Categories\" />
+    <Folder Include="UseCases\V1\Expenses\Commands\Add\Validations\" />
     <Folder Include="UseCases\V1\Users\" />
   </ItemGroup>
 

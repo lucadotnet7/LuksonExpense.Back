@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using LuksonExpense.Application.DTOs.MappingDtos.Modules;
+using LuksonExpense.Application.DTOs.MappingDtos;
 using LuksonExpense.Application.DTOs.Requests.Modules;
 using LuksonExpense.Domain.Models;
 

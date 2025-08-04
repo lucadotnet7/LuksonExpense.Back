@@ -62,9 +62,19 @@ namespace LuksonExpense.Infrastructure.Repositories
             }
         }
 
-        public Task<User> UpdateUser(User user)
+        public async Task<User> UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                EntityEntry<User> newUser = context.Users.Update(user);
+                await context.SaveChangesAsync();
+
+                return newUser.Entity;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

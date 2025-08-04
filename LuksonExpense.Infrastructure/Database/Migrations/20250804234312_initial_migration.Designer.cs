@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LuksonExpense.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250521202557_add_users")]
-    partial class add_users
+    [Migration("20250804234312_initial_migration")]
+    partial class initial_migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,7 +84,8 @@ namespace LuksonExpense.Infrastructure.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExpenseId");
+                    b.HasIndex("ExpenseId")
+                        .IsUnique();
 
                     b.ToTable("Categories");
                 });
@@ -95,8 +96,14 @@ namespace LuksonExpense.Infrastructure.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric");
+
                     b.Property<Guid>("BudgetId")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
@@ -113,6 +120,8 @@ namespace LuksonExpense.Infrastructure.Database.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BudgetId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Expenses");
                 });
@@ -188,6 +197,10 @@ namespace LuksonExpense.Infrastructure.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("AccessToken")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -197,6 +210,9 @@ namespace LuksonExpense.Infrastructure.Database.Migrations
 
                     b.Property<bool>("EmailVerified")
                         .HasColumnType("boolean");
+
+                    b.Property<DateTime>("ExpirationToken")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Firstname")
                         .IsRequired()
@@ -209,9 +225,15 @@ namespace LuksonExpense.Infrastructure.Database.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<Guid>("RefreshToken")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -232,8 +254,8 @@ namespace LuksonExpense.Infrastructure.Database.Migrations
             modelBuilder.Entity("LuksonExpense.Domain.Models.Category", b =>
                 {
                     b.HasOne("LuksonExpense.Domain.Models.Expense", "Expense")
-                        .WithMany("Categories")
-                        .HasForeignKey("ExpenseId")
+                        .WithOne()
+                        .HasForeignKey("LuksonExpense.Domain.Models.Category", "ExpenseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -248,17 +270,20 @@ namespace LuksonExpense.Infrastructure.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("LuksonExpense.Domain.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Budget");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("LuksonExpense.Domain.Models.Budget", b =>
                 {
                     b.Navigation("Expenses");
-                });
-
-            modelBuilder.Entity("LuksonExpense.Domain.Models.Expense", b =>
-                {
-                    b.Navigation("Categories");
                 });
 
             modelBuilder.Entity("LuksonExpense.Domain.Models.User", b =>

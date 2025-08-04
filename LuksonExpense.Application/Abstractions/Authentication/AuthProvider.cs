@@ -15,12 +15,13 @@ namespace LuksonExpense.Application.Abstractions.Authentication
         IHttpContextAccessor contextAccessor,
         IUserRepository userRepository)
     {
-        public string CreateToken(User user)
+        public (string accessToken, DateTime tokenExpiration) CreateToken(User user)
         {
             string secretKey = configuration["Jwt:SecretKey"]!;
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
 
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            DateTime tokenExpirationInMinutes = DateTime.UtcNow.AddMinutes(Convert.ToInt32(configuration["Jwt:ExpiresInMinutes"]));
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -29,7 +30,7 @@ namespace LuksonExpense.Application.Abstractions.Authentication
                     new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                     new Claim(ClaimTypes.Email, user.Email)
                 ]),
-                Expires = DateTime.UtcNow.AddMinutes(Convert.ToInt32(configuration["Jwt:ExpiresInMinutes"])),
+                Expires = tokenExpirationInMinutes,
                 SigningCredentials = credentials,
                 Issuer = configuration["Jwt:Issuer"],
                 Audience = configuration["Jwt:Audience"]
@@ -37,9 +38,9 @@ namespace LuksonExpense.Application.Abstractions.Authentication
 
             var handler = new JsonWebTokenHandler();
 
-            string token = handler.CreateToken(tokenDescriptor);
+            string accessToken = handler.CreateToken(tokenDescriptor);
 
-            return token;
+            return (accessToken, tokenExpirationInMinutes);
         }
 
         public async Task<User> GetCurrentUser()

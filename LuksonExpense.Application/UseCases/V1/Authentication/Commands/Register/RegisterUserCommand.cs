@@ -26,9 +26,7 @@ namespace LuksonExpense.Application.UseCases.V1.Authentication.Commands.Register
 
             try
             {
-                User? existUser = await userRepository.GetUserByEmail(request.Request.Email);
-
-                if (existUser != null)
+                if (await EmailAlreadyExists(request.Request.Email))
                 {
                     response.StatusCode = HttpStatusCode.BadRequest;
                     response.Error = new ErrorResponse
@@ -42,12 +40,15 @@ namespace LuksonExpense.Application.UseCases.V1.Authentication.Commands.Register
                 User user = mapper.Map<User>(request.Request);
                 user.Password = passwordHasher.HashPassword(request.Request.Password);
 
+                (string accessToken, DateTime expirationToken) = authProvider.CreateToken(user);
+
+                user.AccessToken = accessToken;
+                user.ExpirationToken = expirationToken;
+
                 await userRepository.CreateUser(user);
 
-                string token = authProvider.CreateToken(user);
-
                 response.StatusCode = HttpStatusCode.Created;
-                response.Content = new LoginRegisterResponse(token, DateTime.UtcNow);
+                response.Content = new LoginRegisterResponse(accessToken, DateTime.UtcNow, expirationToken, user.RefreshToken);
 
                 return response;
             }
@@ -55,6 +56,16 @@ namespace LuksonExpense.Application.UseCases.V1.Authentication.Commands.Register
             {
                 throw;
             }
+        }
+
+        private async Task<bool> EmailAlreadyExists(string email) 
+        {
+            User? existUser = await userRepository.GetUserByEmail(email);
+
+            if (existUser != null)
+                return true;
+
+            return false;
         }
     }
 }

@@ -19,4 +19,8 @@
     <ProjectReference Include="..\LuksonExpense.Domain\LuksonExpense.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Database\Migrations\" />
+  </ItemGroup>
+
 </Project>

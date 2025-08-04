@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using LuksonExpense.Application.DTOs.MappingDtos.Budgets;
+using LuksonExpense.Application.DTOs.MappingDtos;
 using LuksonExpense.Application.DTOs.Requests.Budgets;
 using LuksonExpense.Domain.Models;
 
@@ -17,7 +17,6 @@ namespace LuksonExpense.Application.DTOs.Profiles
                 .ForMember(dest => dest.CreatedAt, opt => GetActualDateTime());
 
             CreateMap<Budget, BudgetDTO>()
-                .ForMember(dest => dest.BudgetId, opt => opt.MapFrom(x => x.Id.ToString()))
                 .ForMember(dest => dest.BudgetName, opt => opt.MapFrom(x => x.Name))
                 .ForMember(dest => dest.BudgetDescription, opt => opt.MapFrom(x => x.Description))
                 .ForMember(dest => dest.Period, opt => opt.MapFrom(x => GetBudgetPeriod(x)));

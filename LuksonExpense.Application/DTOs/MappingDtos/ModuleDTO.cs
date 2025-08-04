@@ -1,4 +1,4 @@
-﻿namespace LuksonExpense.Application.DTOs.MappingDtos.Modules
+﻿namespace LuksonExpense.Application.DTOs.MappingDtos
 {
     public sealed record class ModuleDTO
     {

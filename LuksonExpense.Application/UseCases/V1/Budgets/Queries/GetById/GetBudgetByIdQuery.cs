@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using AutoMapper;
 using LuksonExpense.Application.Abstractions.Authentication;
-using LuksonExpense.Application.DTOs.MappingDtos.Budgets;
+using LuksonExpense.Application.DTOs.MappingDtos;
 using LuksonExpense.Domain.Models;
 using LuksonExpense.Domain.Shared;
 using LuksonExpense.Infrastructure.Interfaces;

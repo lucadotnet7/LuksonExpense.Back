@@ -1,6 +1,6 @@
 ﻿using LuksonExpense.Domain.Models;
 
-namespace LuksonExpense.Application.DTOs.MappingDtos.Budgets
+namespace LuksonExpense.Application.DTOs.MappingDtos
 {
     public sealed record class BudgetDTO
     {
@@ -9,6 +9,6 @@ namespace LuksonExpense.Application.DTOs.MappingDtos.Budgets
         public string? BudgetDescription { get; set; }
         public string Period { get; set; } = string.Empty;
         public decimal Amount { get; set; }
-        public IEnumerable<Expense> Expenses { get; set; }
+        public IEnumerable<Expense>? Expenses { get; set; }
     }
 }

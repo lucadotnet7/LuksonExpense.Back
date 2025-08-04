@@ -51,10 +51,16 @@ namespace LuksonExpense.Application.UseCases.V1.Authentication.Queries.Login
                     return response;
                 }
 
-                string token = authProvider.CreateToken(user);
+                (string token, DateTime expirationToken )= authProvider.CreateToken(user);
+
+                user.AccessToken = token;
+                user.ExpirationToken = expirationToken;
+                user.RefreshToken = Guid.NewGuid();
+
+                await userRepository.UpdateUser(user);
 
                 response.StatusCode = HttpStatusCode.OK;
-                response.Content = new LoginRegisterResponse(token, DateTime.UtcNow);
+                response.Content = new LoginRegisterResponse(token, DateTime.UtcNow, expirationToken, user.RefreshToken);
 
                 return response;
             }

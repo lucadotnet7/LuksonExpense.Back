@@ -18,10 +18,13 @@ namespace LuksonExpense.Domain.Models
         public DateTime Date { get; set; }
 
         [Required]
-        [ForeignKey("BudgetId")]
-        public Guid BudgetId { get; set; }
-        public Budget? Budget { get; set; }
+        public decimal Amount { get; set; }
 
-        public ICollection<Category> Categories { get; set; } = new List<Category>();
+        [Required]
+        [ForeignKey("BudgetId")]
+        public Budget Budget { get; set; } = new();
+
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; } = new();
     }
 }
